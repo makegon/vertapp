@@ -1,9 +1,8 @@
 import React from "react";
-import {StyleSheet, View} from "react-native";
+import {View} from "react-native";
 import { Card, Button, FormLabel, FormInput } from "react-native-elements";
 import { onSignIn } from "../../auth";
-import {BGDARK, BGSOFT} from "../../../constants";
-
+import styles from './Style'
 
 export default ({ navigation }) => {
     const { sighHome, btnActive } = styles
@@ -26,20 +25,3 @@ export default ({ navigation }) => {
     </View>
     )
 };
-
-const styles = StyleSheet.create({
-    sighHome: {
-        backgroundColor: BGSOFT,
-        flex: 1,
-        paddingVertical: 20
-
-    },
-    btnActive:{
-        marginTop: 20,
-        backgroundColor: BGDARK
-    },
-    btnSigh:{
-        marginTop: 20,
-        backgroundColor: "transparent"
-    }
-})

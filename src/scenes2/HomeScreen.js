@@ -1,58 +1,62 @@
-import React, {Component} from 'react'
-import {View, ScrollView, StyleSheet} from 'react-native'
-import { Header, ImageCard, Layout } from '../components/uikit'
-import {ARTICLE_DETAILS} from "../routes";
-import {BGDARK, BGSOFT} from '../../constants'
-import {w} from "../../constants";
-import Icon from "react-native-vector-icons/FontAwesome";
-
-const imgurl = 'http://cdn.onlinewebfonts.com/svg/img_453986.png'
-const url = 'http://10.102.100.121:3000/api/tasks?access_token=vlKd3hoPHZxLojCGSasWeaFi1Kw7G6SDnL1vm5PKmqyjyfHVGeeaEic0UAbGb06S'
-const iconView = "sticky-note"
-
-export default class HomeScreen extends Component {
-    state = {
-        title: 'Список заметок',
-        data: []
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import React, { Component } from 'react';
+import { View, ScrollView, StyleSheet } from 'react-native';
+import { Header, ImageCard, Layout } from '../components/uimod/index';
+import { ARTICLE_DETAILS } from "../routes";
+import { BGSOFT } from '../../constants';
+import { inject, observer } from "mobx-react";
+import load from '../components/HTTP/load';
+let HomeScreen = class HomeScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
+        };
+        this.loadData();
     }
-
-    componentDidMount = async () => {
-        try {
-            const response = await fetch(url)
-            const data = await response.json()
-            this.setState({ data })
-        } catch (e) {
-            throw e
-        }
+    loadData() {
+        load(this.props.store.urlHTTP)
+            .then(response => {
+            this.setState({
+                data: JSON.parse(response)
+            });
+        });
     }
-
+    gettingTitle(title) {
+        this.props.store.getTitle(title);
+    }
     render() {
-        const { bodyHome } = styles
-        const { title, data } = this.state
-        const { navigation } = this.props
-        return (
-            <View style={bodyHome}>
-                <Header title={title} />
-                <ScrollView>
-                    <Layout>
-                        { data.map(item => (
-                            <ImageCard
-                                iconView={iconView}
-                                img={imgurl}
-                                data={item}
-                                key={item.id}
-                                onPress={() => navigation.navigate(ARTICLE_DETAILS, (item))}
-                            />
-                        ))}
-                    </Layout>
-                </ScrollView>
-            </View>
-        )
+        const title = this.props.store.titleHead;
+        const iconView = this.props.store.iconNote;
+        const { bodyHome } = styles;
+        const { data } = this.state;
+        const { navigation } = this.props;
+        return (React.createElement(View, { style: bodyHome },
+            React.createElement(Header, { title: title }),
+            React.createElement(ScrollView, null,
+                React.createElement(Layout, null, data.map(item => (React.createElement(ImageCard, { iconView: iconView, data: item, key: item.id, onPress: () => {
+                        navigation.navigate(ARTICLE_DETAILS, (item));
+                        this.gettingTitle(item.title);
+                    } })))))));
     }
-}
+};
+HomeScreen = __decorate([
+    inject('store'),
+    observer,
+    __metadata("design:paramtypes", [Object])
+], HomeScreen);
+export default HomeScreen;
 const styles = StyleSheet.create({
     bodyHome: {
         backgroundColor: BGSOFT,
         flex: 1
     }
-})
+});
