@@ -10,11 +10,14 @@ export default class TestStore{
   @observable getMeetup = '';
   @observable iconNote = 'sticky-note';
   @observable titleHead = 'Список заметок';
+  @observable articleEdit = true;
 
   @action getTitle = (data) => {
       this.titleHead = data;
   }
-
+  @action articleView = () => {
+      this.articleEdit = !this.articleEdit;
+  }
 
   @observable nickName = 'nickname';
   @observable classMobx = 'btn btn-primary btn-lg btn-dark float-left btn_blc';

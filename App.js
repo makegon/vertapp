@@ -15,7 +15,6 @@ export default class App extends React.Component {
             .catch(err => alert("Error Authentification"));
     }
     render() {
-        debugger;
         const { checkedSignIn, signedIn } = this.state;
         if (!checkedSignIn) {
             return null;

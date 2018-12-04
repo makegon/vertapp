@@ -70,6 +70,9 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontWeight: '700'
     },
+    containerArticle:{
+        backgroundColor: '#fff'
+    },
     container: {
         width: w / 2.4,
         paddingVertical: 10
@@ -87,6 +90,13 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 5},
         shadowOpacity: 0.4,
         alignSelf: 'center'
+    },
+    h1Article:{
+        padding: 15,
+        fontFamily: 'AvenirNext-DemiBold',
+        fontSize: 26,
+        alignSelf: 'center',
+        textAlign: 'center'
     },
     h1: {
         padding: 1,
@@ -135,6 +145,21 @@ const styles = StyleSheet.create({
     btnSigh:{
         marginTop: 20,
         backgroundColor: "transparent"
+    },
+    h2Article:{
+        paddingHorizontal: 15,
+        fontFamily: 'AvenirNext-DemiBold',
+        fontSize: 18,
+        color: '#424242',
+        alignSelf: 'center',
+        textAlign: 'center'
+    },
+    bodys:{
+        alignItems: "center",
+        flex: 1,
+        marginBottom: 150,
+        backgroundColor: "#fff"
+
     }
 })
 

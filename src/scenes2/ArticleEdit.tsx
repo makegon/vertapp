@@ -9,9 +9,11 @@ import {inject, observer} from "mobx-react";
 @inject('store')
 @observer
 class ArticleDetails extends Component{
+    viewEdit() {
+        this.props.store.articleView();
+    }
     render() {
         const {btnActive, container, bodys} = styles
-
         const { title, body} = this.props.navigation.state.params
         const { navigation } = this.props
         return(
@@ -22,22 +24,19 @@ class ArticleDetails extends Component{
                     leftIcon='angle-double-left'
                     headerColor={BGDARK}
                     leftBtnColor={AKCENT}
-                    onPress={() =>navigation.goBack()}
+                    onPress={() =>{
+                            navigation.goBack()
+                            this.viewEdit()
+                        }
+                    }
                 />
-                <ScrollView>
-                    <View style={bodys}>
-                        <FormLabel>Название</FormLabel>
-                        <FormInput placeholder={title}/>
-                        <FormLabel>Содержание заметки</FormLabel>
-                        <FormInput secureTextEntry placeholder={body}/>
+                {
+                    this.props.store.articleEdit ?
+                        <View><Text>FALSE</Text></View> :
+                        <View><Text>TRUE</Text></View>
 
-                    <Button
-                        buttonStyle={btnActive}
-                        title={this.props.store.btnSave}
-                        onPress={() => navigation.navigate(ARTICLE_EDIT, (''))}
-                    />
-                    </View>
-                </ScrollView>
+                }
+
             </View>
 
         )
