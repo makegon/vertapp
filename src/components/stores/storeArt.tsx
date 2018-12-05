@@ -12,6 +12,24 @@ export default class TestStore{
   @observable iconNote = 'sticky-note';
   @observable titleHead = 'Список заметок';
   @observable articleEdit = true;
+  @observable switchEdit = true;
+
+
+
+  @action switchDone = (data) => {
+      this.switchEdit = data;
+  }
+  @action getSwitchDone = (data) => {
+      this.switchEdit = data;
+  }
+  @action articleView = () => {
+      this.articleEdit = !this.articleEdit;
+  }
+
+
+
+
+
 
   @action getTitle = (data) => {
       this.titleHead = data;

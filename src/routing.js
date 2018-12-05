@@ -7,6 +7,7 @@ import Fonticon from 'react-native-vector-icons/FontAwesome';
 import { AKCENT, BGDARK } from "../constants";
 import SignUp from "./components/uimod/SignUp";
 import SignIn from "./components/uimod/SignIn";
+import HomeScreen from './scenes2/HomeScreen';
 export const SignedOut = createStackNavigator({
     SignUp: {
         screen: SignUp,
@@ -19,6 +20,11 @@ export const SignedOut = createStackNavigator({
         navigationOptions: {
             title: "Вход в приложение"
         }
+    }
+});
+export const homeScreen = createStackNavigator({
+    homeScreen: {
+        screen: HomeScreen
     }
 });
 export const SignedIn = createBottomTabNavigator({

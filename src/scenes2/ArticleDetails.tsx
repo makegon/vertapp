@@ -1,16 +1,26 @@
 import React, { Component } from 'react'
 import {ScrollView, View, Text, StyleSheet} from 'react-native'
-import {Header} from "../components/uimod/index";
-import {AKCENT, BGDARK, BGSOFT, BGTAP} from '../../constants'
+import {Header, ImageCard, SwitchTab} from "../components/uimod/index";
+import {AKCENT, BGBLUE, BGDARK, BGSOFT, BGTAP} from '../../constants'
 import {Button, Card, FormInput, FormLabel} from "react-native-elements";
 import {ARTICLE_DETAILS, ARTICLE_EDIT, APP_HOME} from "../routes";
 import styles from '../components/uimod/Style'
 import {inject, observer} from "mobx-react";
 import todelete from "../components/HTTP/delete";
+import switchart from "../components/HTTP/switcharticle";
 
 @inject('store')
 @observer
 class ArticleDetails extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: '',
+            body: '',
+            done:'',
+            id:''
+        };
+    }
     viewEdit() {
         this.props.store.articleView();
     }
@@ -25,12 +35,42 @@ class ArticleDetails extends Component{
     }
 
     _onChangeText = text => {
-        console.warn('text', text)
+        const body = text;
+        this.setState({
+            body: body
+        })
+
+    }
+    _onChangeTitle = text => {
+        const title = text;
+        this.setState({
+            title: title
+        })
+
+    }
+    _onChangeSwitch = text => {
+        const done = !text;
+        this.setState({
+            done : done
+        })
+
+    }
+    sendData = id =>{
+        const body = this.state.body;
+        const title = this.state.title;
+        const done = this.state.done;
+        const sData = {
+            title: title,
+            body: body,
+            done: done,
+            id: id
+        }
+        switchart(sData)
     }
     render() {
         const {btnActive, btnSigh, h1Article, h2Article, containerArticle, bodys} = styles
         const item = this.props.navigation.state.params
-        const { title, body, id} = item
+        const { title, body, id, done} = item
         const { navigation } = this.props
         return(
             <View style={containerArticle}>
@@ -77,20 +117,32 @@ class ArticleDetails extends Component{
                             <View style={bodys}>
                                 <FormLabel>Название</FormLabel>
                                 <FormInput
-                                    onChangeText={this._onChangeText}
                                     placeholder={title}
+                                    onChangeText={this._onChangeTitle}
                                 />
                                 <FormLabel>Содержание заметки</FormLabel>
                                 <FormInput
                                     onChangeText={this._onChangeText}
                                     placeholder={body}
                                 />
+                                <SwitchTab
+                                    onValueChange={() => {
+                                        this._onChangeSwitch(item.done)
+                                    }
+                                    }
+                                    switchState={done}
+                                    onTintColor={AKCENT}
+                                    thumbTintColor={BGDARK}
+                                    tintColor={BGBLUE}
+                                    />
 
                                 <Button
                                     buttonStyle={btnActive}
                                     title={this.props.store.btnSave}
                                     onPress={() => {
-                                            console.warn('Title')
+                                            navigation.navigate(APP_HOME)
+                                            this.viewEdit()
+                                            //this.sendData(id)
                                         }
                                     }
                                 />

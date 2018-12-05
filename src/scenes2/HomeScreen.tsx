@@ -23,6 +23,7 @@ export default class HomeScreen extends Component {
                 this.setState({
                     data: JSON.parse(response)
                 });
+                this.props.store.switchDone(this.state.data.done);
             });
 
     }
@@ -58,7 +59,6 @@ export default class HomeScreen extends Component {
                                 key={item.id}
                                 onPress={() => {
                                         navigation.navigate(ARTICLE_DETAILS, (item))
-                                        this.gettingTitle(item.title)
                                     }
                                 }
                             />

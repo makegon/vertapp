@@ -1,15 +1,14 @@
 import axios from 'axios'
 
 export default dataurl => {
-    dataurl = !dataurl
+    const id = dataurl.id
     return new Promise((success, fail) => {
         axios.request({
             method:'put',
-            url:`http://10.102.100.121:3000/api/tasks/12?access_token=vlKd3hoPHZxLojCGSasWeaFi1Kw7G6SDnL1vm5PKmqyjyfHVGeeaEic0UAbGb06S`,
+            url:`http://10.102.100.121:3000/api/tasks/${id}?access_token=vlKd3hoPHZxLojCGSasWeaFi1Kw7G6SDnL1vm5PKmqyjyfHVGeeaEic0UAbGb06S`,
             data: {
-                title: "Заметка первая",
-                body: "Содержание первой заметки",
-                done: dataurl
+                title: dataurl.title,
+                body: dataurl.body
             }
         }).then((response) =>{
             success(response)

@@ -29,6 +29,7 @@ let HomeScreen = class HomeScreen extends Component {
             this.setState({
                 data: JSON.parse(response)
             });
+            this.props.store.switchDone(this.state.data.done);
         });
     }
     gettingTitle(title) {
@@ -50,7 +51,6 @@ let HomeScreen = class HomeScreen extends Component {
                         this.switchart(item.done);
                     }, switchState: item.done, onTintColor: AKCENT, thumbTintColor: BGDARK, tintColor: BGBLUE, iconView: iconView, data: item, key: item.id, onPress: () => {
                         navigation.navigate(ARTICLE_DETAILS, (item));
-                        this.gettingTitle(item.title);
                     } })))))));
     }
 };

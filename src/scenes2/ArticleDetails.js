@@ -4,19 +4,57 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 import React, { Component } from 'react';
 import { ScrollView, View, Text } from 'react-native';
-import { Header } from "../components/uimod/index";
-import { AKCENT, BGDARK, BGSOFT } from '../../constants';
+import { Header, SwitchTab } from "../components/uimod/index";
+import { AKCENT, BGBLUE, BGDARK, BGSOFT } from '../../constants';
 import { Button, FormInput, FormLabel } from "react-native-elements";
+import { APP_HOME } from "../routes";
 import styles from '../components/uimod/Style';
 import { inject, observer } from "mobx-react";
 import todelete from "../components/HTTP/delete";
+import switchart from "../components/HTTP/switcharticle";
 let ArticleDetails = class ArticleDetails extends Component {
-    constructor() {
-        super(...arguments);
+    constructor(props) {
+        super(props);
         this._onChangeText = text => {
-            console.warn('text', text);
+            const body = text;
+            this.setState({
+                body: body
+            });
+        };
+        this._onChangeTitle = text => {
+            const title = text;
+            this.setState({
+                title: title
+            });
+        };
+        this._onChangeSwitch = text => {
+            const done = !text;
+            this.setState({
+                done: done
+            });
+        };
+        this.sendData = id => {
+            const body = this.state.body;
+            const title = this.state.title;
+            const done = this.state.done;
+            const sData = {
+                title: title,
+                body: body,
+                done: done,
+                id: id
+            };
+            switchart(sData);
+        };
+        this.state = {
+            title: '',
+            body: '',
+            done: '',
+            id: ''
         };
     }
     viewEdit() {
@@ -32,7 +70,7 @@ let ArticleDetails = class ArticleDetails extends Component {
     render() {
         const { btnActive, btnSigh, h1Article, h2Article, containerArticle, bodys } = styles;
         const item = this.props.navigation.state.params;
-        const { title, body, id } = item;
+        const { title, body, id, done } = item;
         const { navigation } = this.props;
         return (React.createElement(View, { style: containerArticle },
             React.createElement(Header, { detail: true, title: title, leftIcon: 'angle-double-left', headerColor: BGDARK, leftBtnColor: AKCENT, onPress: () => {
@@ -57,16 +95,22 @@ let ArticleDetails = class ArticleDetails extends Component {
                 : React.createElement(ScrollView, null,
                     React.createElement(View, { style: bodys },
                         React.createElement(FormLabel, null, "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435"),
-                        React.createElement(FormInput, { onChangeText: this._onChangeText, placeholder: title }),
+                        React.createElement(FormInput, { placeholder: title, onChangeText: this._onChangeTitle }),
                         React.createElement(FormLabel, null, "\u0421\u043E\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u0435 \u0437\u0430\u043C\u0435\u0442\u043A\u0438"),
                         React.createElement(FormInput, { onChangeText: this._onChangeText, placeholder: body }),
+                        React.createElement(SwitchTab, { onValueChange: () => {
+                                this._onChangeSwitch(item.done);
+                            }, switchState: done, onTintColor: AKCENT, thumbTintColor: BGDARK, tintColor: BGBLUE }),
                         React.createElement(Button, { buttonStyle: btnActive, title: this.props.store.btnSave, onPress: () => {
-                                console.warn('Title');
+                                navigation.navigate(APP_HOME);
+                                this.viewEdit();
+                                //this.sendData(id)
                             } })))));
     }
 };
 ArticleDetails = __decorate([
     inject('store'),
-    observer
+    observer,
+    __metadata("design:paramtypes", [Object])
 ], ArticleDetails);
 export default ArticleDetails;
