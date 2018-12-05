@@ -2,9 +2,11 @@ import React, {Component} from 'react'
 import {View, ScrollView, StyleSheet, Text} from 'react-native'
 import { Header, ImageCard, Layout } from '../components/uimod/index'
 import {ARTICLE_DETAILS} from "../routes";
-import {BGSOFT} from '../../constants'
+import {BGSOFT,BGDARK,BGBLUE,BGTAP,AKCENT} from '../../constants'
 import {inject, observer} from "mobx-react";
 import load from '../components/HTTP/load'
+import switcharticle from '../components/HTTP/switcharticle'
+
 @inject('store')
 @observer
 export default class HomeScreen extends Component {
@@ -27,6 +29,9 @@ export default class HomeScreen extends Component {
     gettingTitle(title) {
         this.props.store.getTitle(title);
     }
+    switchart(data){
+        switcharticle(data)
+    }
     render() {
         const title = this.props.store.titleHead
         const iconView = this.props.store.iconNote
@@ -40,6 +45,14 @@ export default class HomeScreen extends Component {
                     <Layout>
                         { data.map(item => (
                             <ImageCard
+                                onValueChange={() => {
+                                    this.switchart(item.done)
+                                }
+                                }
+                                switchState={item.done}
+                                onTintColor={AKCENT}
+                                thumbTintColor={BGDARK}
+                                tintColor={BGBLUE}
                                 iconView={iconView}
                                 data={item}
                                 key={item.id}

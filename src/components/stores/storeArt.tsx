@@ -4,6 +4,7 @@ export default class TestStore{
   @observable test1 = 'test';
   @observable token = 'vlKd3hoPHZxLojCGSasWeaFi1Kw7G6SDnL1vm5PKmqyjyfHVGeeaEic0UAbGb06S';
   @observable urlHTTP = `http://10.102.100.121:3000/api/tasks?access_token=${this.token}`;
+  @observable delHTTP = `http://10.102.100.121:3000/api/tasks?access_token=${this.token}`;;
   @observable btnEdit = 'РЕДАКТИРОВАТЬ';
   @observable btnDrop = 'Удалить';
   @observable btnSave = 'СОХРАНИТЬ';

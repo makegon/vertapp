@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {View, ScrollView, StyleSheet, Text, TextInput, KeyboardAvoidingView} from 'react-native'
-import { Header, Add } from '../components/uimod/index'
+import {Header, Add, ImageCard} from '../components/uimod/index'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {BGDARK, AKCENT,BGTAP, BGBLUE, BGSOFT} from '../../constants'
 
 
-import {ADD_DETAILS} from "../routes";
+import {ADD_DETAILS, ARTICLE_DETAILS} from "../routes";
 import {w} from "../../constants";
 
 const imgurl = 'http://cdn.onlinewebfonts.com/svg/img_453986.png'
@@ -26,7 +26,10 @@ export default class HomeScreen extends Component {
 
             <KeyboardAvoidingView behavior="padding" style={bodyHome}>
                 <Header title={title} />
-                <Add myIcon={myIcon} />
+                <Add
+                    onPress={() => this.newArticle()}
+                    myIcon={myIcon}
+                />
             </KeyboardAvoidingView>
 
         )

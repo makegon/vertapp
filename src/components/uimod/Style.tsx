@@ -1,7 +1,7 @@
 import React from 'react'
-import {StyleSheet} from "react-native";
-import {AKCENT, BGBLUE, BGDARK, BGSOFT, BGTAP, w} from "../../../constants";
-
+import {StyleSheet} from 'react-native';
+import {AKCENT, BGBLUE, BGDARK, BGSOFT, BGTAP, w} from '../../../constants';
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const styles = StyleSheet.create({
     viewStyle: {
@@ -76,6 +76,10 @@ const styles = StyleSheet.create({
     container: {
         width: w / 2.4,
         paddingVertical: 10
+    },
+    containerAdd:{
+        backgroundColor: '#fff',
+        flex: 1
     },
     sub: {
         width: 70,
@@ -159,6 +163,27 @@ const styles = StyleSheet.create({
         flex: 1,
         marginBottom: 150,
         backgroundColor: "#fff"
+
+    },
+    switchStyle:{
+        width: w / 1.4,
+        height: w * 0.13,
+    },
+    authHome: {
+        backgroundColor: BGSOFT,
+        flex: 1,
+        paddingVertical: 20
+
+    },
+    bodysAdd:{
+        alignItems: "center",
+        backgroundColor: BGBLUE,
+        justifyContent: "center",
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+        alignSelf: "center",
+        margin: 20
 
     }
 })

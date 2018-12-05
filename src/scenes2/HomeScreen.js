@@ -11,9 +11,10 @@ import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { Header, ImageCard, Layout } from '../components/uimod/index';
 import { ARTICLE_DETAILS } from "../routes";
-import { BGSOFT } from '../../constants';
+import { BGSOFT, BGDARK, BGBLUE, AKCENT } from '../../constants';
 import { inject, observer } from "mobx-react";
 import load from '../components/HTTP/load';
+import switcharticle from '../components/HTTP/switcharticle';
 let HomeScreen = class HomeScreen extends Component {
     constructor(props) {
         super(props);
@@ -33,6 +34,9 @@ let HomeScreen = class HomeScreen extends Component {
     gettingTitle(title) {
         this.props.store.getTitle(title);
     }
+    switchart(data) {
+        switcharticle(data);
+    }
     render() {
         const title = this.props.store.titleHead;
         const iconView = this.props.store.iconNote;
@@ -42,7 +46,9 @@ let HomeScreen = class HomeScreen extends Component {
         return (React.createElement(View, { style: bodyHome },
             React.createElement(Header, { title: title }),
             React.createElement(ScrollView, null,
-                React.createElement(Layout, null, data.map(item => (React.createElement(ImageCard, { iconView: iconView, data: item, key: item.id, onPress: () => {
+                React.createElement(Layout, null, data.map(item => (React.createElement(ImageCard, { onValueChange: () => {
+                        this.switchart(item.done);
+                    }, switchState: item.done, onTintColor: AKCENT, thumbTintColor: BGDARK, tintColor: BGBLUE, iconView: iconView, data: item, key: item.id, onPress: () => {
                         navigation.navigate(ARTICLE_DETAILS, (item));
                         this.gettingTitle(item.title);
                     } })))))));

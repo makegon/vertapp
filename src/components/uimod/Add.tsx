@@ -1,9 +1,11 @@
-import React from "react";
-import {Text, TextInput, View, TouchableOpacity} from "react-native";
+import React, { Component } from "react";
+import {Text, TextInput, View, TouchableOpacity, Button} from "react-native";
 import {BGSOFT} from "../../../constants";
 import styles from './Style'
+import {ARTICLE_EDIT} from "../../routes";
 
-const Add = ({ myIcon }) => {
+const Add = ({ myIcon, onPress }) => {
+
     const { titleLogin, loginCont, addArticle, btnCont, btnText } = styles
     return (
         <View style={loginCont}>
@@ -19,7 +21,7 @@ const Add = ({ myIcon }) => {
                 placeholderTextColor={BGSOFT}
                 style={[addArticle, {height:200, }]}
             />
-            <TouchableOpacity style={btnCont}>
+            <TouchableOpacity onPress={onPress} style={btnCont}>
                 <Text style={btnText}>Сохранить</Text>
             </TouchableOpacity>
         </View>
@@ -27,3 +29,4 @@ const Add = ({ myIcon }) => {
 }
 
 export { Add }
+

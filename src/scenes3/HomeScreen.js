@@ -19,7 +19,7 @@ export default class HomeScreen extends Component {
         const { navigation } = this.props;
         return (React.createElement(KeyboardAvoidingView, { behavior: "padding", style: bodyHome },
             React.createElement(Header, { title: title }),
-            React.createElement(Add, { myIcon: myIcon })));
+            React.createElement(Add, { onPress: () => this.newArticle(), myIcon: myIcon })));
     }
 }
 const styles = StyleSheet.create({
