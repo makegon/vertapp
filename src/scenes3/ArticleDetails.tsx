@@ -8,15 +8,46 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import {ARTICLE_DETAILS} from "../routes";
 import addnew from '../components/HTTP/addnew'
 import styles from '../components/uimod/Style'
+import switchart from "../components/HTTP/switcharticle";
+import load from "../components/HTTP/load";
 
 class ArticleDetails extends PureComponent{
-    newArticle(){
-        const dataArt = {
-            title: 'ЗАМЕТКА',
-            body: 'Состояние заметки'
-        }
-        addnew(dataArt);
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: '',
+            body: ''
+        };
     }
+    _onChangeTitle = text => {
+        const title = text;
+        this.setState({
+            title: title
+        })
+
+    }
+    _onChangeBody = text => {
+        const body = text;
+        this.setState({
+            body: body
+        })
+
+    }
+    newArticle(){
+        const body = this.state.body;
+        const title = this.state.title;
+        const sData = {
+            title: title,
+            body: body
+        }
+        addnew(sData)
+            .then(response=> {
+                console.warn('Заметка добавлена')
+                this.props.store.addDone();
+            });
+
+    }
+
 
     render() {
         const { authHome, btnActive, bodysAdd} = styles
@@ -25,9 +56,13 @@ class ArticleDetails extends PureComponent{
         return(
             <View style={authHome}>
                 <AddArticle
+                    onChangeTextTitle={this._onChangeTitle}
+                    onChangeTextBody={this._onChangeBody}
                     iconStyle={bodysAdd}
                     buttonStyle={btnActive}
-                    onPress={() => this.newArticle()}
+                    onPress={() => {
+                        this.newArticle()
+                    }}
                     myIcon={myIcon}
                 />
             </View>

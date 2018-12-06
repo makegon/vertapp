@@ -25,7 +25,9 @@ export default class TestStore{
   @action articleView = () => {
       this.articleEdit = !this.articleEdit;
   }
-
+  @action articleView = () => {
+      this.articleEdit = !this.articleEdit;
+  }
 
 
 

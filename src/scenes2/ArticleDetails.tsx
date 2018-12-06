@@ -142,7 +142,7 @@ class ArticleDetails extends Component{
                                     onPress={() => {
                                             navigation.navigate(APP_HOME)
                                             this.viewEdit()
-                                            //this.sendData(id)
+                                            this.sendData(id)
                                         }
                                     }
                                 />

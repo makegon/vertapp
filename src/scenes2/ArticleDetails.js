@@ -104,7 +104,7 @@ let ArticleDetails = class ArticleDetails extends Component {
                         React.createElement(Button, { buttonStyle: btnActive, title: this.props.store.btnSave, onPress: () => {
                                 navigation.navigate(APP_HOME);
                                 this.viewEdit();
-                                //this.sendData(id)
+                                this.sendData(id);
                             } })))));
     }
 };

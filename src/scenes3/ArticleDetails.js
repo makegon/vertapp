@@ -6,19 +6,46 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import addnew from '../components/HTTP/addnew';
 import styles from '../components/uimod/Style';
 class ArticleDetails extends PureComponent {
-    newArticle() {
-        const dataArt = {
-            title: 'ЗАМЕТКА',
-            body: 'Состояние заметки'
+    constructor(props) {
+        super(props);
+        this._onChangeTitle = text => {
+            const title = text;
+            this.setState({
+                title: title
+            });
         };
-        addnew(dataArt);
+        this._onChangeBody = text => {
+            const body = text;
+            this.setState({
+                body: body
+            });
+        };
+        this.state = {
+            title: '',
+            body: ''
+        };
+    }
+    newArticle() {
+        const body = this.state.body;
+        const title = this.state.title;
+        const sData = {
+            title: title,
+            body: body
+        };
+        addnew(sData)
+            .then(response => {
+            console.warn('Заметка добавлена');
+            this.props.store.addDone();
+        });
     }
     render() {
         const { authHome, btnActive, bodysAdd } = styles;
         const myIcon = (React.createElement(Icon, { name: "calendar-plus-o", size: 60, color: BGDARK }));
         const { navigation } = this.props;
         return (React.createElement(View, { style: authHome },
-            React.createElement(AddArticle, { iconStyle: bodysAdd, buttonStyle: btnActive, onPress: () => this.newArticle(), myIcon: myIcon })));
+            React.createElement(AddArticle, { onChangeTextTitle: this._onChangeTitle, onChangeTextBody: this._onChangeBody, iconStyle: bodysAdd, buttonStyle: btnActive, onPress: () => {
+                    this.newArticle();
+                }, myIcon: myIcon })));
     }
 }
 export default ArticleDetails;

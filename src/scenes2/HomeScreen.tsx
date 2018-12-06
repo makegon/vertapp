@@ -25,7 +25,6 @@ export default class HomeScreen extends Component {
                 });
                 this.props.store.switchDone(this.state.data.done);
             });
-
     }
     gettingTitle(title) {
         this.props.store.getTitle(title);
