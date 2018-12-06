@@ -5,7 +5,7 @@ import {Button, Card, FormInput, FormLabel} from "react-native-elements";
 import {onSignOut} from "../auth";
 import {BGBLUE, BGDARK, BGSOFT} from "../../constants";
 import Icon from "react-native-vector-icons/FontAwesome";
-import {ARTICLE_DETAILS} from "../routes";
+import {APP_HOME, ARTICLE_DETAILS} from "../routes";
 import addnew from '../components/HTTP/addnew'
 import styles from '../components/uimod/Style'
 import switchart from "../components/HTTP/switcharticle";
@@ -38,12 +38,12 @@ class ArticleDetails extends PureComponent{
         const title = this.state.title;
         const sData = {
             title: title,
-            body: body
+            body: body,
+            done: false
         }
         addnew(sData)
             .then(response=> {
                 console.warn('Заметка добавлена')
-                this.props.store.addDone();
             });
 
     }
@@ -62,6 +62,7 @@ class ArticleDetails extends PureComponent{
                     buttonStyle={btnActive}
                     onPress={() => {
                         this.newArticle()
+                        navigation.navigate(APP_HOME)
                     }}
                     myIcon={myIcon}
                 />

@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { AddArticle } from "../components/uimod/index";
 import { BGDARK } from "../../constants";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { APP_HOME } from "../routes";
 import addnew from '../components/HTTP/addnew';
 import styles from '../components/uimod/Style';
 class ArticleDetails extends PureComponent {
@@ -30,12 +31,12 @@ class ArticleDetails extends PureComponent {
         const title = this.state.title;
         const sData = {
             title: title,
-            body: body
+            body: body,
+            done: false
         };
         addnew(sData)
             .then(response => {
             console.warn('Заметка добавлена');
-            this.props.store.addDone();
         });
     }
     render() {
@@ -45,6 +46,7 @@ class ArticleDetails extends PureComponent {
         return (React.createElement(View, { style: authHome },
             React.createElement(AddArticle, { onChangeTextTitle: this._onChangeTitle, onChangeTextBody: this._onChangeBody, iconStyle: bodysAdd, buttonStyle: btnActive, onPress: () => {
                     this.newArticle();
+                    navigation.navigate(APP_HOME);
                 }, myIcon: myIcon })));
     }
 }

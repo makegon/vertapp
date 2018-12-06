@@ -32,8 +32,8 @@ let ArticleDetails = class ArticleDetails extends Component {
                 title: title
             });
         };
-        this._onChangeSwitch = text => {
-            const done = !text;
+        this._onChangeSwitch = () => {
+            const done = !this.props.store.switchEdit;
             this.setState({
                 done: done
             });
@@ -86,7 +86,7 @@ let ArticleDetails = class ArticleDetails extends Component {
                         React.createElement(Text, { style: h1Article }, title),
                         React.createElement(Text, { style: h2Article }, body.replace(/<[^>]+>/g, '')),
                         React.createElement(Text, null,
-                            "ID \u0437\u0430\u043C\u0435\u0442\u043A\u0438",
+                            "ID \u0437\u0430\u043C\u0435\u0442\u043A\u0438 ",
                             id),
                         React.createElement(Button, { buttonStyle: btnActive, title: this.props.store.btnEdit, onPress: () => {
                                 this.viewEdit();
@@ -99,8 +99,8 @@ let ArticleDetails = class ArticleDetails extends Component {
                         React.createElement(FormLabel, null, "\u0421\u043E\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u0435 \u0437\u0430\u043C\u0435\u0442\u043A\u0438"),
                         React.createElement(FormInput, { onChangeText: this._onChangeText, placeholder: body }),
                         React.createElement(SwitchTab, { onValueChange: () => {
-                                this._onChangeSwitch(item.done);
-                            }, switchState: done, onTintColor: AKCENT, thumbTintColor: BGDARK, tintColor: BGBLUE }),
+                                this._onChangeSwitch(done);
+                            }, state: done, onTintColor: AKCENT, thumbTintColor: BGDARK, tintColor: BGBLUE }),
                         React.createElement(Button, { buttonStyle: btnActive, title: this.props.store.btnSave, onPress: () => {
                                 navigation.navigate(APP_HOME);
                                 this.viewEdit();

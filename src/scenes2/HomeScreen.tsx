@@ -30,7 +30,7 @@ export default class HomeScreen extends Component {
         this.props.store.getTitle(title);
     }
     switchart(data){
-        switcharticle(data)
+        console.warn('isSwitch')
     }
     render() {
         const title = this.props.store.titleHead

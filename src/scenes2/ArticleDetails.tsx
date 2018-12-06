@@ -8,6 +8,7 @@ import styles from '../components/uimod/Style'
 import {inject, observer} from "mobx-react";
 import todelete from "../components/HTTP/delete";
 import switchart from "../components/HTTP/switcharticle";
+import {observable} from "mobx";
 
 @inject('store')
 @observer
@@ -48,12 +49,11 @@ class ArticleDetails extends Component{
         })
 
     }
-    _onChangeSwitch = text => {
-        const done = !text;
+    _onChangeSwitch = () => {
+        const done = !this.props.store.switchEdit;
         this.setState({
             done : done
         })
-
     }
     sendData = id =>{
         const body = this.state.body;
@@ -70,7 +70,7 @@ class ArticleDetails extends Component{
     render() {
         const {btnActive, btnSigh, h1Article, h2Article, containerArticle, bodys} = styles
         const item = this.props.navigation.state.params
-        const { title, body, id, done} = item
+        const { title, body, id, done } = item
         const { navigation } = this.props
         return(
             <View style={containerArticle}>
@@ -95,7 +95,7 @@ class ArticleDetails extends Component{
                             <View style={bodys}>
                                 <Text style={h1Article} >{title}</Text>
                                 <Text style={h2Article}>{body.replace(/<[^>]+>/g, '')}</Text>
-                                <Text>ID заметки{id}</Text>
+                                <Text>ID заметки {id}</Text>
                                 <Button
                                     buttonStyle={btnActive}
                                     title={this.props.store.btnEdit}
@@ -127,10 +127,10 @@ class ArticleDetails extends Component{
                                 />
                                 <SwitchTab
                                     onValueChange={() => {
-                                        this._onChangeSwitch(item.done)
+                                        this._onChangeSwitch(done)
                                     }
                                     }
-                                    switchState={done}
+                                    state={done}
                                     onTintColor={AKCENT}
                                     thumbTintColor={BGDARK}
                                     tintColor={BGBLUE}

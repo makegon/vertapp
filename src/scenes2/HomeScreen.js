@@ -14,7 +14,6 @@ import { ARTICLE_DETAILS } from "../routes";
 import { BGSOFT, BGDARK, BGBLUE, AKCENT } from '../../constants';
 import { inject, observer } from "mobx-react";
 import load from '../components/HTTP/load';
-import switcharticle from '../components/HTTP/switcharticle';
 let HomeScreen = class HomeScreen extends Component {
     constructor(props) {
         super(props);
@@ -36,7 +35,7 @@ let HomeScreen = class HomeScreen extends Component {
         this.props.store.getTitle(title);
     }
     switchart(data) {
-        switcharticle(data);
+        console.warn('isSwitch');
     }
     render() {
         const title = this.props.store.titleHead;
