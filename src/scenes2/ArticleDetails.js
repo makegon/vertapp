@@ -15,8 +15,7 @@ import { Button, FormInput, FormLabel } from "react-native-elements";
 import { APP_HOME } from "../routes";
 import styles from '../components/uimod/Style';
 import { inject, observer } from "mobx-react";
-import todelete from "../components/HTTP/delete";
-import switchart from "../components/HTTP/switcharticle";
+import { deleteart, updateart } from '../components/HTTP/http';
 let ArticleDetails = class ArticleDetails extends Component {
     constructor(props) {
         super(props);
@@ -48,7 +47,7 @@ let ArticleDetails = class ArticleDetails extends Component {
                 done: done,
                 id: id
             };
-            switchart(sData);
+            updateart(sData);
         };
         this.state = {
             title: '',
@@ -61,7 +60,7 @@ let ArticleDetails = class ArticleDetails extends Component {
         this.props.store.articleView();
     }
     onDelete(id) {
-        todelete(`http://10.102.100.121:3000/api/tasks/${id}?access_token=${this.props.store.token}`)
+        deleteart(`http://10.102.100.121:3000/api/tasks/${id}?access_token=${this.props.store.token}`)
             .then(response => {
             console.warn('URLDEL УСПЕШНО');
             this.props.navigation.goBack();

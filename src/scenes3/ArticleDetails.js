@@ -4,7 +4,7 @@ import { AddArticle } from "../components/uimod/index";
 import { BGDARK } from "../../constants";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { APP_HOME } from "../routes";
-import addnew from '../components/HTTP/addnew';
+import addnew from '../components/HTTP/isDelete/addnew';
 import styles from '../components/uimod/Style';
 class ArticleDetails extends PureComponent {
     constructor(props) {

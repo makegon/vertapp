@@ -24,6 +24,7 @@ export default ({ navigation }) => {
 
                     onPress={() => {
                         onSignIn().then(() => navigation.navigate("SignedIn"));
+
                     }}
                 />
                 <Button

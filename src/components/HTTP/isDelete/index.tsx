@@ -1,7 +1,7 @@
 import {
     ARTICLES_FETCH,
     ARTICLES_FAIL
-} from '../../dataType'
+} from '../../../dataType'
 
 export const getArticles = (text) => async (dispatch) => {
     function onSuccess(success) {

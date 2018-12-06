@@ -6,10 +6,10 @@ import {onSignOut} from "../auth";
 import {BGBLUE, BGDARK, BGSOFT} from "../../constants";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {APP_HOME, ARTICLE_DETAILS} from "../routes";
-import addnew from '../components/HTTP/addnew'
+import addnew from '../components/HTTP/isDelete/addnew'
 import styles from '../components/uimod/Style'
-import switchart from "../components/HTTP/switcharticle";
-import load from "../components/HTTP/load";
+import switchart from "../components/HTTP/isDelete/switcharticle";
+import load from "../components/HTTP/isDelete/load";
 
 class ArticleDetails extends PureComponent{
     constructor(props) {

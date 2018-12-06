@@ -6,9 +6,7 @@ import {Button, Card, FormInput, FormLabel} from "react-native-elements";
 import {ARTICLE_DETAILS, ARTICLE_EDIT, APP_HOME} from "../routes";
 import styles from '../components/uimod/Style'
 import {inject, observer} from "mobx-react";
-import todelete from "../components/HTTP/delete";
-import switchart from "../components/HTTP/switcharticle";
-import {observable} from "mobx";
+import {deleteart, updateart} from '../components/HTTP/http'
 
 @inject('store')
 @observer
@@ -27,7 +25,7 @@ class ArticleDetails extends Component{
     }
 
     onDelete(id) {
-        todelete (`http://10.102.100.121:3000/api/tasks/${id}?access_token=${this.props.store.token}`)
+        deleteart (`http://10.102.100.121:3000/api/tasks/${id}?access_token=${this.props.store.token}`)
             .then(response=> {
                 console.warn('URLDEL УСПЕШНО');
                 this.props.navigation.goBack()
@@ -65,7 +63,7 @@ class ArticleDetails extends Component{
             done: done,
             id: id
         }
-        switchart(sData)
+        updateart(sData)
     }
     render() {
         const {btnActive, btnSigh, h1Article, h2Article, containerArticle, bodys} = styles

@@ -13,7 +13,7 @@ import { Header, ImageCard, Layout } from '../components/uimod/index';
 import { ARTICLE_DETAILS } from "../routes";
 import { BGSOFT, BGDARK, BGBLUE, AKCENT } from '../../constants';
 import { inject, observer } from "mobx-react";
-import load from '../components/HTTP/load';
+import { loadart } from '../components/HTTP/http';
 let HomeScreen = class HomeScreen extends Component {
     constructor(props) {
         super(props);
@@ -23,7 +23,7 @@ let HomeScreen = class HomeScreen extends Component {
         this.loadData();
     }
     loadData() {
-        load(this.props.store.urlHTTP)
+        loadart(this.props.store.urlHTTP)
             .then(response => {
             this.setState({
                 data: JSON.parse(response)

@@ -4,8 +4,7 @@ import { Header, ImageCard, Layout } from '../components/uimod/index'
 import {ARTICLE_DETAILS} from "../routes";
 import {BGSOFT,BGDARK,BGBLUE,BGTAP,AKCENT} from '../../constants'
 import {inject, observer} from "mobx-react";
-import load from '../components/HTTP/load'
-import switcharticle from '../components/HTTP/switcharticle'
+import {loadart} from '../components/HTTP/http'
 
 @inject('store')
 @observer
@@ -18,7 +17,7 @@ export default class HomeScreen extends Component {
         this.loadData();
     }
     loadData() {
-        load (this.props.store.urlHTTP)
+        loadart(this.props.store.urlHTTP)
             .then(response=> {
                 this.setState({
                     data: JSON.parse(response)
