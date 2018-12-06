@@ -94,9 +94,9 @@ let ArticleDetails = class ArticleDetails extends Component {
                 : React.createElement(ScrollView, null,
                     React.createElement(View, { style: bodys },
                         React.createElement(FormLabel, null, "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435"),
-                        React.createElement(FormInput, { placeholder: title, onChangeText: this._onChangeTitle }),
+                        React.createElement(FormInput, { onChangeText: this._onChangeTitle, value: title }),
                         React.createElement(FormLabel, null, "\u0421\u043E\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u0435 \u0437\u0430\u043C\u0435\u0442\u043A\u0438"),
-                        React.createElement(FormInput, { onChangeText: this._onChangeText, placeholder: body }),
+                        React.createElement(FormInput, { onChangeText: this._onChangeText, value: body }),
                         React.createElement(SwitchTab, { onValueChange: () => {
                                 this._onChangeSwitch(done);
                             }, state: done, onTintColor: AKCENT, thumbTintColor: BGDARK, tintColor: BGBLUE }),

@@ -115,13 +115,13 @@ class ArticleDetails extends Component{
                             <View style={bodys}>
                                 <FormLabel>Название</FormLabel>
                                 <FormInput
-                                    placeholder={title}
                                     onChangeText={this._onChangeTitle}
+                                    value={title}
                                 />
                                 <FormLabel>Содержание заметки</FormLabel>
                                 <FormInput
                                     onChangeText={this._onChangeText}
-                                    placeholder={body}
+                                    value={body}
                                 />
                                 <SwitchTab
                                     onValueChange={() => {
